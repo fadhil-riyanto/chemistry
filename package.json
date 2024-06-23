@@ -1,0 +1,17 @@
+{
+  "name": "@fadhil-riyanto/chemistry",
+  "version": "1.0.0",
+  "description": "unofficial library that query data from pubchem national library of medicine, and might some site of chemistry",
+  "main": "index.ts",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fadhil Riyanto",
+  "license": "GPL-2.0",
+  "dependencies": {
+    "axios": "^1.7.2"
+  }
+}
