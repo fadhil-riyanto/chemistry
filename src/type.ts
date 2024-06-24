@@ -10,3 +10,16 @@ export interface searchResult {
     }
 }
 
+
+export interface searchResultCID {
+    ConceptsAndCIDs: {
+        Concept: {
+            ConceptName: string;
+            ConceptID: number
+        }[];
+        CID: {
+            [index: number]: number;
+        }
+    };
+}
+

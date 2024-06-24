@@ -1,5 +1,5 @@
 import {AxiosRequestConfig, AxiosInstance } from 'axios';
-import { searchResult } from './type'
+import { searchResult, searchResultCID } from './type'
 import { endpoint } from './endpoint'
 import { axiosinit } from './axiosInstance'
 
@@ -13,24 +13,28 @@ export class Search {
         this.axios = axiosinit.init()
     }
 
-    private async doRequest(): Promise<searchResult> {
+    public async getCID(compound_name?: searchResult["dictionary_terms"]["compound"]) {
+        var result: searchResultCID = await this.doRequest(
+            endpoint.PUBCHEM_CID_RESOLVE, {
+                name: "Propane"
+            }
+        );
+        return result.ConceptsAndCIDs.CID[0]
+    }
+
+    private async doRequest(host: string, data?: any): Promise<any> {
         return await this.axios.get(
-            endpoint.PUBCHEM_AUTOCOMPELETE + encodeURI(this.compound)
+            host, { params: data }
         ).then((response) => {
-            console.log(response.data)
+            return response.data
         })
-        // return await axios({
-        //     method: "get",
-        //     url: endpoint.PUBCHEM_AUTOCOMPELETE + encodeURI(this.compound)
-        // }).then((response) => {
-        //     
-        // })
     }
 
     public async get() {
-        var result: searchResult = await this.doRequest();
-        
-        console.log(result.dictionary_terms.compound)
+        var result: searchResult = await this.doRequest(
+            endpoint.PUBCHEM_AUTOCOMPELETE + encodeURI(this.compound)
+        );
+        return result.dictionary_terms.compound
     }
 
 
