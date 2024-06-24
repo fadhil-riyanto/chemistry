@@ -59,8 +59,10 @@ export interface CompoundRecord {
     }
 }
 
+export interface queryresult {
+}
 
-export interface CIDqueryResult {
+export interface CIDqueryResult extends queryresult {
     name: string;
     CID: number;
     structure: {

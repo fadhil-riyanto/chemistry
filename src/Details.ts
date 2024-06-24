@@ -1,6 +1,6 @@
 import { CompoundID } from './record/CompoundID'
 import { RecordBaseclass } from './record/baseclass'
-import { recordType } from './type'
+import { recordType, queryresult } from './type'
 
 interface IDetailsProp {
     selectedType: recordType;
@@ -24,7 +24,7 @@ export class Details {
         return this
     }
 
-    public async get() {
+    public async get() : Promise<queryresult>{
         let run!: RecordBaseclass;
         switch (this.detailsProp.selectedType) {
             case recordType.Compound:
