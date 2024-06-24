@@ -34,7 +34,7 @@ export interface searchResultCID {
 export interface CompoundRecord {
     Record: {
         RecordType: recordType;
-        Record: number;
+        RecordNumber: number;
         RecordTitle: string;
         Section: {
             TOCHeading: string;
@@ -48,12 +48,19 @@ export interface CompoundRecord {
                 };
                 Information: {
                     ReferenceNumber: Number;
+                    Description: string;
                     Value: {
                         Boolean: {
                             [Index: number]: Boolean
                         }[]
                     }
-                }[]
+                }[];
+                Section: {
+                    TOCHeading: string;
+                    Description: string;
+                    URL: URL;
+                    // Information: 
+                }
             }[]
         }[]
     }
@@ -63,17 +70,17 @@ export interface queryresult {
 }
 
 export interface CIDqueryResult extends queryresult {
-    name: string;
-    CID: number;
-    structure: {
-        image_2d: string;
-        image_3d: string;
-        image_crystal: string;
+    name?: string;
+    CID?: number;
+    structure?: {
+        image_2d?: string;
+        image_3d?: string;
+        image_crystal?: string;
     };
-    chemical_safety: {
+    chemical_safety?: {
         // enum defined soon
     };
-    formula: string[];
-    mass: number;
-    desc: string;
+    formula?: string[];
+    mass?: number;
+    desc?: string;
 }
