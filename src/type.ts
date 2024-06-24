@@ -1,3 +1,7 @@
+export enum recordType {
+    Compound = "CID"
+}
+
 export interface searchResult {
     status: {
         [code: string]: number
@@ -23,3 +27,17 @@ export interface searchResultCID {
     };
 }
 
+/**
+ * defined in /record/CompoundID.ts
+ */
+
+export interface CompoundRecord {
+    Record: {
+        RecordType: recordType;
+        Record: number;
+        RecordTitle: string;
+        // Section: 
+    }
+    
+
+}
