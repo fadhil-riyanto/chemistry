@@ -1,9 +1,10 @@
-import { chemistry } from "@fadhil-riyanto/chemistry"
+import { chemistry, CIDqueryResult } from "@fadhil-riyanto/chemistry"
 
 (async () => {
-    let details = new chemistry.Details().setId(6334).setType(chemistry.recordType.Compound)
+    let details = new chemistry.Details().setId(222).setType(chemistry.recordType.Compound)
 
-    console.log((await details.get()).Record.Section[0].Description)
+    let compounddetail: CIDqueryResult = await details.get()
+    console.log(compounddetail);
 
 })()
 ;
