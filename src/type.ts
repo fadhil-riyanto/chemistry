@@ -10,7 +10,7 @@ export interface searchResult {
     dictionary_terms: {
         compound: {
             [index: number]: string
-        }
+        };
     }
 }
 
@@ -36,8 +36,26 @@ export interface CompoundRecord {
         RecordType: recordType;
         Record: number;
         RecordTitle: string;
-        // Section: 
+        Section: {
+            TOCHeading: string;
+            Description: string;
+            Section: {
+                TOCHeading: string;
+                Description: string;
+                URL: URL;
+                DisplayControls: {
+                    MoveToTop: Boolean;
+                };
+                Information: {
+                    ReferenceNumber: Number;
+                    Value: {
+                        Boolean: {
+                            [Index: number]: Boolean
+                        }[]
+                    }
+                }[]
+            }[]
+        }[]
     }
-    
-
 }
+
