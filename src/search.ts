@@ -16,7 +16,7 @@ export class Search {
     public async getCID(compound_name?: searchResult["dictionary_terms"]["compound"]) {
         var result: searchResultCID = await this.axios.doRequest(
             endpoint.PUBCHEM_CID_RESOLVE, {
-                name: "Propane"
+                name: compound_name
             }
         );
         return result.ConceptsAndCIDs.CID[0]
