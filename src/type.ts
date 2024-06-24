@@ -59,3 +59,19 @@ export interface CompoundRecord {
     }
 }
 
+
+export interface CIDqueryResult {
+    name: string;
+    CID: number;
+    structure: {
+        image_2d: string;
+        image_3d: string;
+        image_crystal: string;
+    };
+    chemical_safety: {
+        // enum defined soon
+    };
+    formula: string[];
+    mass: number;
+    desc: string;
+}
