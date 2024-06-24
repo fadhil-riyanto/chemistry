@@ -1,9 +1,7 @@
 import { CompoundID } from './record/CompoundID'
 import { RecordBaseclass } from './record/baseclass'
+import { recordType } from './type'
 
-export enum recordType {
-    Compound
-}
 interface IDetailsProp {
     selectedType: recordType;
     selectedNumber: number;
@@ -12,7 +10,11 @@ export class Details {
     
     private detailsProp!: IDetailsProp;
 
-    public set(detailsNumber: number) {
+    public constructor() {
+        this.detailsProp = {} as IDetailsProp
+    }
+
+    public setId(detailsNumber: number) {
         this.detailsProp.selectedNumber = detailsNumber;
         return this
     }
@@ -22,7 +24,7 @@ export class Details {
         return this
     }
 
-    public get() {
+    public async get() {
         let run!: RecordBaseclass;
         switch (this.detailsProp.selectedType) {
             case recordType.Compound:
@@ -33,6 +35,6 @@ export class Details {
                 break;
         }
 
-        run.getdata()
+        return await run.getdata()
     }
 }
