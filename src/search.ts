@@ -1,4 +1,4 @@
-import {AxiosRequestConfig, AxiosInstance } from 'axios';
+
 import { searchResult, searchResultCID } from './type'
 import { endpoint } from './endpoint'
 import { axiosinit } from './axiosInstance'
