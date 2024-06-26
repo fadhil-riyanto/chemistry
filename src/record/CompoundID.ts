@@ -114,7 +114,7 @@ export class CompoundID {
     /**
      * return all data
      */
-    public async sumarry(): Promise<CIDqueryResult> {
+    public async summary(): Promise<CIDqueryResult> {
         let data: chemicalSummary = new chemicalSummary(this.CID)
         return await data.export()
     }
