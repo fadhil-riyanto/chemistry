@@ -2,7 +2,7 @@ import {AxiosRequestConfig, AxiosInstance } from 'axios';
 import { searchResult, searchResultCID } from './type'
 import { endpoint } from './endpoint'
 import { axiosinit } from './axiosInstance'
-
+import util from 'node:util'
 
 export class Search {
     private compound: string;
@@ -15,11 +15,9 @@ export class Search {
 
     public async getCID(compound_name?: searchResult["dictionary_terms"]["compound"]) {
         var result: searchResultCID = await this.axios.doRequest(
-            endpoint.PUBCHEM_CID_RESOLVE, {
-                name: compound_name
-            }
+            util.format(endpoint.PUBCHEM_CID_RESOLVE, compound_name)
         );
-        return result.ConceptsAndCIDs.CID[0]
+        return result
     }
 
     
