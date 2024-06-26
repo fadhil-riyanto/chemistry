@@ -35,48 +35,8 @@ export interface searchResultCID {
 }
 
 /**
- * defined in /record/CompoundID.ts
+ * 
  */
-
-export interface CompoundRecord {
-    Record: {
-        RecordType: recordType;
-        RecordNumber: number;
-        RecordTitle: string;
-        Section: {
-            TOCHeading: string;
-            Description: string;
-            Section: {
-                TOCHeading: string;
-                Description: string;
-                URL: URL;
-                DisplayControls: {
-                    MoveToTop: Boolean;
-                };
-                Information: {
-                    ReferenceNumber: Number;
-                    Description: string;
-                    Value: {
-                        Boolean: {
-                            [Index: number]: Boolean
-                        }[]
-                    }
-                }[];
-                Section: {
-                    TOCHeading: string;
-                    Description: string;
-                    URL: URL;
-                    // Information: 
-                }
-            }[]
-        }[]
-    }
-}
-
-export interface queryresult {
-}
-
-// endpoint Title,[CID],[safety? soon],MolecularFormula,
 export interface CIDqueryResult {
     name?: {
         compound_name: string;
