@@ -2,6 +2,13 @@ export enum recordType {
     Compound = "CID"
 }
 
+export enum imageType {
+    IMG_2D,
+    IMG_3D,
+    CRYSTAL_STRUCTURE
+    
+}
+
 export interface searchResult {
     status: {
         [code: string]: number
@@ -69,18 +76,20 @@ export interface CompoundRecord {
 export interface queryresult {
 }
 
-export interface CIDqueryResult extends queryresult {
-    name?: string;
+// endpoint Title,[CID],[safety? soon],MolecularFormula,
+export interface CIDqueryResult {
+    name?: {
+        compound_name: string;
+        iupac_name: string;
+        
+    };
     CID?: number;
-    structure?: {
-        image_2d?: string;
-        image_3d?: string;
-        image_crystal?: string;
+    formula?: string;
+    other_name: string[];
+    mass?: number; // Molecular Weight
+    metadata: {
+        // use datetime later
+        created: Date,
     };
-    chemical_safety?: {
-        // enum defined soon
-    };
-    formula?: string[];
-    mass?: number;
     desc?: string;
 }
