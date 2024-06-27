@@ -12,10 +12,10 @@ import { chemistry, CIDqueryResult, imageType } from "@fadhil-riyanto/chemistry"
      * 
      */
 
-    let details = new chemistry.CompoundID(1140)
-    console.log(details.image(imageType.IMG_2D))
+    let details = new chemistry.CompoundID(5360545)
+    console.log(details.image(imageType.IMG_3D))
 
-    console.log(await details.sumarry())
+    console.log((await details.summary()))
 
     // let compounddetail: CIDqueryResult = await details.get()
     // console.log(compounddetail);
