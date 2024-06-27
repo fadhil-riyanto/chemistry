@@ -1,6 +1,7 @@
 import { imageTypeNotFound } from '../Exception/imageTypeNotFound'
 import { axiosinit } from '../axiosInstance'
 import { imageType, CIDqueryResult } from '../type'
+import { CompoundFullData } from './types/Compound'
 import { endpoint, imageEndpoint } from '../endpoint';
 import util from 'node:util'; 
 
@@ -86,6 +87,78 @@ class chemicalSummary {
     }
 }
 
+class chemicalFull {
+    protected CID!: number;
+    private axios: axiosinit;
+    private CompoundFullData: CompoundFullData
+
+    public constructor(CID: number) {
+        this.CID = CID;
+        this.axios = new axiosinit().init()
+        this.CompoundFullData = { data: {}} as CompoundFullData;
+    }
+
+    private handleStructure(data: any) {
+        this.CompoundFullData.data.structure = {
+            desc: data.Description,
+            structure_2d: util.format(imageEndpoint.IMAGE_2D, this.CID),
+            structure_3d: util.format(imageEndpoint.IMAGE_3D, this.CID)
+        }
+    }
+
+    private handleChemicalSafety(data: any) {
+        this.CompoundFullData.data.chemicalSafety = {
+            desc: data.Description,
+            GHS: data.Information[0].Value.StringWithMarkup[0].Markup.map((ctx: any) => {
+                return {
+                    image: ctx.URL,
+                    text: ctx.Extra
+                }
+            })
+        }
+    }
+
+    private handleNamesAndIdentifier(data: any) {
+        
+    }
+
+    private async getFullData(): Promise<any> {
+        let result: any = await this.axios.doRequest(
+            util.format(endpoint.PUBCHEM_FULL, this.CID)
+        )
+
+        this.CompoundFullData.CID = this.CID;
+        this.CompoundFullData.title = result.Record.RecordTitle
+
+        result.Record.Section.forEach((data: any) => {
+            switch (data.TOCHeading) {
+                case "Structures":
+                    this.handleStructure(data)
+                    break;
+
+                case "Chemical Safety":
+                    this.handleChemicalSafety(data)
+                    break;
+
+                case "Names and Identifiers":
+                    this.handleNamesAndIdentifier(data)
+                    break;
+            
+                default:
+                    break;
+            }
+            // console.log(data)
+        });
+
+
+    }
+
+    public async export() {
+        await this.getFullData()
+        return this.CompoundFullData
+    }
+}
+
 export class CompoundID { 
     private CID: number;
     
@@ -119,4 +192,8 @@ export class CompoundID {
         return await data.export()
     }
     
+    public async full() {
+        let data: chemicalFull = new chemicalFull(this.CID)
+        return await data.export()
+    }
 }
